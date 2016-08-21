@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="contact">
   <head>
     <meta charset="utf-8">
     <title>Contact</title>
@@ -7,11 +7,12 @@
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 
   </head>
   <body>
 
-    <div class="container">
+    <div class="container" ng-controller="contactCtrl">
       <h1>Contacts application</h1>
 
       <table class="table table-bordered">
@@ -26,17 +27,19 @@
 
         <tbody>
         <tr>
-          <td><input type="text" class="form-control" ></td>
-          <td><input type="text" class="form-control" ></td>
-          <td><input type="text" class="form-control" ></td>
-          <td><button class="btn btn-primary">Add</button> </td>
+          <td><input type="text" class="form-control" ng-model="contact.name"></td>
+          <td><input type="text" class="form-control"
+                     ng-model="contact.email"></td>
+          <td><input type="text" class="form-control" ng-model="contact.number"></td>
+          <td><button class="btn btn-primary" ng-click="add()">Add</button> </td>
         </tr>
 
-        <tr >
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-danger" >Remove</button> <button class="btn btn-info" data-toggle="modal" data-target="#update">update</button></td>
+        <tr ng-repeat="contact in contacts">
+          <td>{{contact.name}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.number}}</td>
+          <td><button class="btn btn-danger"
+                      ng-click="remove(contact._id)">Remove</button> <button class="btn btn-info" data-toggle="modal" data-target="#update">update</button></td>
         </tr>
 
         </tbody>

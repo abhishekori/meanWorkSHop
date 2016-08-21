@@ -10,7 +10,41 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 
+app.get('/get',function(req,res){
 
+    db.contactlist.find(function (err,docs) {
+
+   //     console.log(err);
+     //   console.log(docs);
+
+        res.json(docs);
+
+    });
+
+
+});
+
+app.post('/contact',function(req,res){
+    console.log(req.body);
+
+    db.contactlist.insert(req.body,function(err,docs){
+        console.log(docs);
+        res.json(docs);
+    });
+
+});
+
+app.delete('/contact/:id', function (req, res) {
+    console.log(req.params.id);
+    var id=req.params.id;
+
+    db.contactlist.remove({_id:mongojs.ObjectId(id)}, function(err, docs) {
+
+        console.log(docs);
+        res.send(docs);
+    });
+
+});
 
 app.listen(3000, function () {
 
